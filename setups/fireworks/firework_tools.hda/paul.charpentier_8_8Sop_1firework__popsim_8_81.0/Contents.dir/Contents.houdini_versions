@@ -1,0 +1,35 @@
+{
+	"values":["19.5.534"
+	],
+	"indexes":{
+		"hdaroot/attribcopy_simattrib.userdata":0,
+		"hdaroot/merge_source.userdata":0,
+		"hdaroot/emit_pattern.userdata":0,
+		"hdaroot/timeshift_nextframe.userdata":0,
+		"hdaroot/switchif_add_pattern_source.userdata":0,
+		"hdaroot/keep_startframe.userdata":0,
+		"hdaroot/t_resize.userdata":0,
+		"hdaroot/add1.userdata":0,
+		"hdaroot/t_v_from_P.userdata":0,
+		"hdaroot/blast_pattern.userdata":0,
+		"hdaroot/t_sid.userdata":0,
+		"hdaroot/keep_explode_pts.userdata":0,
+		"hdaroot/delete_random.userdata":0,
+		"hdaroot/t_emit_at_death.userdata":0,
+		"hdaroot/popnet/t_emit_at_death.userdata":0,
+		"hdaroot/popnet/custom_forces/output0.userdata":0,
+		"hdaroot/out_popsim.userdata":0,
+		"hdaroot/popnet/custom_forces.userdata":0,
+		"hdaroot/groupdelete1.userdata":0,
+		"hdaroot/t_usestartframe.userdata":0,
+		"hdaroot/apply_scale/multiply1.userdata":0,
+		"hdaroot/copytopoints3.userdata":0,
+		"hdaroot/set_stream.userdata":0,
+		"hdaroot/popnet/custom_forces/Wire_Global_Forces_Below.userdata":0,
+		"hdaroot/popnet.userdata":0,
+		"hdaroot/apply_scale.userdata":0,
+		"hdaroot/popnet/t_trailing.userdata":0,
+		"hdaroot/output0.userdata":0,
+		"hdaroot/blast_trails.userdata":0
+	}
+}

@@ -1,0 +1,1160 @@
+# Dialog script for paul.charpentier::firework_popsim::1.0 automatically generated
+
+{
+    name	paul.charpentier::firework_popsim::1.0
+    script	paul.charpentier::firework_popsim::1.0
+    label	"Firework Popsim"
+
+    help {
+	""
+    }
+
+    inputlabel	1	"Emission Geometry"
+    inputlabel	2	"Staged Pattern"
+    inputlabel	3	"Sub-Network Input #3"
+    inputlabel	4	"Sub-Network Input #4"
+
+    parm {
+        name    "sepparm23"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "small" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    parm {
+        name    "resimulate"
+        label   "Reset Simulation"
+        type    button
+        default { "0" }
+        parmtag { "autoscope" "0000000000000000" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "sepparm9"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "small" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    parm {
+        name    "streamname"
+        label   "Stream Name"
+        type    string
+        default { "$OS" }
+        range   { 0 1 }
+        parmtag { "autoscope" "0000000000000000" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "sepparm8"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "medium" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    group {
+        name    "folder8"
+        label   "Main"
+
+        group {
+            name    "folder0"
+            label   "Emission"
+
+            parm {
+                name    "sepparm4"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "medium" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "t_emit_at_death"
+                label   "Emit at Input Death (For Stage 2+)"
+                type    toggle
+                default { "0" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm3"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "medium" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            groupsimple {
+                name    "folder5"
+                label   "Common Emission Settings"
+
+                parm {
+                    name    "sepparm6"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "source"
+                    label   "Source Group"
+                    type    string
+                    default { "" }
+                    menutoggle {
+                        [ "opmenu -l -a get_dying_particle group" ]
+                    }
+                    range   { 0 1 }
+                    parmtag { "autoscope" "0000000000000000" }
+                }
+                parm {
+                    name    "sourcegrouptype"
+                    label   "Group Type"
+                    type    ordinal
+                    default { "guess" }
+                    menu {
+                        "guess"         "Guess from Group"
+                        "breakpoints"   "Breakpoints"
+                        "edges"         "Edges"
+                        "points"        "Points"
+                        "prims"         "Primitives"
+                    }
+                    range   { 0 1 }
+                    parmtag { "autoscope" "0000000000000000" }
+                }
+                parm {
+                    name    "sepparm5"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "life"
+                    label   "Life Expectancy"
+                    type    float
+                    default { "4" }
+                    range   { 0 10 }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "parmvop" "1" }
+                    parmtag { "shaderparmcontexts" "sop" }
+                }
+                parm {
+                    name    "lifevar"
+                    label   "Life Variance"
+                    type    float
+                    default { "0.1" }
+                    range   { 0 5 }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "parmvop" "1" }
+                    parmtag { "shaderparmcontexts" "sop" }
+                }
+                parm {
+                    name    "sepparm7"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+            }
+
+            parm {
+                name    "sepparm"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "medium" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            groupsimple {
+                name    "folder6"
+                label   "Pattern Emission"
+                hidewhen "{ t_emit_at_death == 0 }"
+
+                parm {
+                    name    "patterngroup"
+                    label   "Pattern Group"
+                    type    string
+                    default { "" }
+                    hidewhen "{ t_emit_at_death == 0 }"
+                    menutoggle {
+                        [ "opmenu -l -a blast_pattern group" ]
+                    }
+                    range   { 0 1 }
+                    parmtag { "autoscope" "0000000000000000" }
+                }
+                parm {
+                    name    "patterngrouptype"
+                    label   "Group Type"
+                    type    ordinal
+                    default { "guess" }
+                    hidewhen "{ t_emit_at_death == 0 }"
+                    menu {
+                        "guess"         "Guess from Group"
+                        "breakpoints"   "Breakpoints"
+                        "edges"         "Edges"
+                        "points"        "Points"
+                        "prims"         "Primitives"
+                    }
+                    range   { 0 1 }
+                    parmtag { "autoscope" "0000000000000000" }
+                }
+                parm {
+                    name    "sepparm13"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    hidewhen "{ t_emit_at_death == 0 }"
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "t_name"
+                    label   "Inherit Name from Source"
+                    type    toggle
+                    default { "0" }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "t_targetorient"
+                    label   "Orient Pattern with Point Attributes"
+                    type    toggle
+                    default { "0" }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "sepparm29"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    hidewhen "{ t_emit_at_death == 0 }"
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "jitter"
+                    label   "Jitter Pattern"
+                    type    float
+                    default { "10" }
+                    range   { 0 100 }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "blast_rand"
+                    label   "Delete Percent of Points"
+                    type    float
+                    default { "10" }
+                    range   { 0! 100! }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "sepparm27"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    hidewhen "{ t_emit_at_death == 0 }"
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "t_compute_vel"
+                    label   "Position as velocity"
+                    type    toggle
+                    default { "1" }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "inherit_velocity"
+                    label   "Inherit Velocity"
+                    type    float
+                    default { "0" }
+                    range   { 0 10 }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "pattern_vel"
+                    label   "Multiply Velocity"
+                    type    float
+                    default { "1" }
+                    range   { 0 10 }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "sepparm28"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    hidewhen "{ t_emit_at_death == 0 }"
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "t_emitsize"
+                    label   "Position as velocity"
+                    type    toggle
+                    nolabel
+                    joinnext
+                    default { "1" }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "pattern_size"
+                    label   "Emission Size"
+                    type    float
+                    default { "1" }
+                    disablewhen "{ t_emitsize == 0 }"
+                    range   { 0 10 }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "sepparm26"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    hidewhen "{ t_emit_at_death == 0 }"
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+            }
+
+            groupsimple {
+                name    "folder2"
+                label   "Basic Emission"
+                hidewhen "{ t_emit_at_death == 1 }"
+
+                group {
+                    name    "folder3"
+                    label   "Source"
+                    disablewhentab "{ t_emit_at_death == 1 }"
+
+                    parm {
+                        name    "emittype"
+                        label   "Emission Type"
+                        type    ordinal
+                        default { "allpoint" }
+                        menu {
+                            "allpoint"  "All Points"
+                            "allgeo"    "All Geometry"
+                            "point"     "Points"
+                            "surface"   "Scatter onto Surfaces"
+                        }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "emitattrib"
+                        label   "Emission Attribute"
+                        type    string
+                        default { "" }
+                        disablewhen "{ emittype != surface }"
+                        menutoggle {
+                            [ "opmenu -l -a popnet/source_first_input emitattrib" ]
+                        }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                    }
+                    parm {
+                        name    "relaxpoints"
+                        label   "Relax Points"
+                        type    toggle
+                        nolabel
+                        joinnext
+                        default { "off" }
+                        disablewhen "{ emittype != surface }"
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                    }
+                    parm {
+                        name    "relaxiterations"
+                        label   "Relax Iterations"
+                        type    integer
+                        default { "10" }
+                        disablewhen "{ emittype != surface } { relaxpoints == 0 }"
+                        range   { 0! 100 }
+                        parmtag { "autoscope" "0000000000000000" }
+                    }
+                    parm {
+                        name    "scaleradiiby"
+                        label   "Scale Radii By"
+                        type    float
+                        default { "1" }
+                        disablewhen "{ emittype != surface } { relaxpoints == 0 }"
+                        range   { 0! 2 }
+                        parmtag { "autoscope" "0000000000000000" }
+                    }
+                    parm {
+                        name    "usemaxradius"
+                        label   "Use Max Relax Radius"
+                        type    toggle
+                        nolabel
+                        joinnext
+                        default { "on" }
+                        disablewhen "{ emittype != surface } { relaxpoints == 0 }"
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                    }
+                    parm {
+                        name    "maxradius"
+                        label   "Max Relax Radius"
+                        type    float
+                        default { "10" }
+                        disablewhen "{ emittype != surface } { usemaxradius == 0 } { relaxpoints == 0 }"
+                        range   { 0! 100 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "units" "m-1" }
+                    }
+                }
+
+                group {
+                    name    "folder3_1"
+                    label   "Birth"
+                    disablewhentab "{ t_emit_at_death == 1 }"
+                    grouptag { "visibletabs" "11111" }
+
+                    parm {
+                        name    "t_usestartframe"
+                        label   "Use StartFrame Attribute"
+                        type    toggle
+                        default { "0" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "impulseactiveate"
+                        label   "Impulse Activation"
+                        type    float
+                        default { "$FF==ch(\"startframe\")" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "impulserate"
+                        label   "Impulse Count"
+                        type    float
+                        default { "0" }
+                        disablewhen "{ emittype == allpoint } { emittype == allgeo }"
+                        range   { 0 100000 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "constantactivate"
+                        label   "Const. Activation"
+                        type    float
+                        default { "1" }
+                        disablewhen "{ emittype == allpoint } { emittype == allgeo }"
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "constantrate"
+                        label   "Const. Birth Rate"
+                        type    float
+                        default { "5000" }
+                        disablewhen "{ emittype == allpoint } { emittype == allgeo }"
+                        range   { 0 1e+06 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "usesimpointlimit"
+                        label   "Max Sim Points"
+                        type    toggle
+                        nolabel
+                        joinnext
+                        default { "off" }
+                        disablewhen "{ emittype == allpoint } { emittype == allgeo }"
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "simpointlimit"
+                        label   "Max Sim Points"
+                        type    integer
+                        default { "1e+06" }
+                        disablewhen "{ usesimpointlimit == 0 } { emittype == allpoint } { emittype == allgeo }"
+                        range   { 1 1e+07 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "useframepointlimit"
+                        label   "Max Points per Frame"
+                        type    toggle
+                        nolabel
+                        joinnext
+                        default { "on" }
+                        disablewhen "{ emittype == allpoint } { emittype == allgeo }"
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "framepointlimit"
+                        label   "Max Points per Frame"
+                        type    integer
+                        default { "1e+06" }
+                        disablewhen "{ useframepointlimit == 0 } { emittype == allpoint } { emittype == allgeo }"
+                        range   { 1 1e+07 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "probemit"
+                        label   "Probabilistic Emission"
+                        type    toggle
+                        default { "on" }
+                        disablewhen "{ emittype == allpoint } { emittype == allgeo }"
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "seed"
+                        label   "Seed"
+                        type    float
+                        default { "0" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "jitterbirthtime"
+                        label   "Jitter Birth Time"
+                        type    ordinal
+                        default { "positive" }
+                        menu {
+                            "none"      "None"
+                            "negative"  "Negative"
+                            "positive"  "Positive"
+                        }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "jittersource"
+                        label   "Interpolate Source"
+                        type    ordinal
+                        default { "none" }
+                        disablewhen "{ jitterbirthtime == none }"
+                        menu {
+                            "none"      "None"
+                            "forward"   "Forward"
+                            "back"      "Back"
+                        }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "jittermethod"
+                        label   "Interpolation Method"
+                        type    ordinal
+                        default { "topology" }
+                        hidewhen "{ jitterbirthtime == none } { jittersource == none }"
+                        menu {
+                            "topology"  "Match Topology"
+                            "velocity"  "Use Point Velocity"
+                        }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                }
+
+                group {
+                    name    "folder3_2"
+                    label   "Velocity"
+                    grouptag { "visibletabs" "11111" }
+
+                    parm {
+                        name    "initvel"
+                        label   "Initial Velocity"
+                        type    ordinal
+                        default { "use" }
+                        disablewhen "{ t_emit_at_death == 1 }"
+                        menu {
+                            "use"   "Use inherited velocity"
+                            "add"   "Add to inherited velocity"
+                            "set"   "Set initial velocity"
+                        }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "inheritvel"
+                        label   "Inherit Velocity"
+                        type    float
+                        default { "1" }
+                        disablewhen "{ t_emit_at_death == 0 initvel == set }"
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "script_callback_language" "python" }
+                    }
+                    parm {
+                        name    "vel"
+                        label   "Velocity"
+                        type    direction
+                        size    3
+                        default { "0" "0" "0" }
+                        disablewhen "{ initvel == use }"
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "units" "m1s-1" }
+                    }
+                    parm {
+                        name    "var"
+                        label   "Variance"
+                        type    direction
+                        size    3
+                        default { "1" "1" "1" }
+                        disablewhen "{ initvel == use }"
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "units" "m1s-1" }
+                    }
+                }
+
+            }
+
+        }
+
+        group {
+            name    "folder0_1"
+            label   "Forces"
+            tabbreak
+
+            parm {
+                name    "sepparm12"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "main_gravity"
+                label   "Gravity Multiplier"
+                type    float
+                default { "1" }
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "main_drag"
+                label   "Drag Multplier"
+                type    float
+                default { "0.1" }
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm14"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            groupsimple {
+                name    "folder12"
+                label   "Wind"
+
+                parm {
+                    name    "sepparm16"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "main_wind"
+                    label   "Wind Velocity"
+                    type    direction
+                    size    3
+                    default { "0" "0" "0" }
+                    range   { 0 10 }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "parmvop" "1" }
+                    parmtag { "shaderparmcontexts" "cvex" }
+                    parmtag { "units" "kg1m1s-2" }
+                }
+                parm {
+                    name    "sepparm15"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                groupsimple {
+                    name    "folder13"
+                    label   "Noise"
+
+                    parm {
+                        name    "main_amp"
+                        label   "Amplitude"
+                        type    float
+                        default { "0" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                        parmtag { "units" "kg1m1s-2" }
+                    }
+                    parm {
+                        name    "main_swirlsize"
+                        label   "Swirl Size"
+                        type    float
+                        default { "1" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                        parmtag { "units" "m1" }
+                    }
+                    parm {
+                        name    "main_swirlscale"
+                        label   "Swirl Scale"
+                        type    float
+                        size    3
+                        default { "1" "1" "1" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "main_pulselength"
+                        label   "Pulse Length"
+                        type    float
+                        default { "1" }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                        parmtag { "units" "s1" }
+                    }
+                    parm {
+                        name    "main_rough"
+                        label   "Roughness"
+                        type    float
+                        default { "0.5" }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "main_atten"
+                        label   "Attenuation"
+                        type    float
+                        default { "1" }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "main_turb"
+                        label   "Turbulence"
+                        type    integer
+                        default { "3" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "main_offset"
+                        label   "Offset"
+                        type    float
+                        size    4
+                        default { "0" "0" "0" "0" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    group {
+        name    "folder8_1"
+        label   "Trails"
+
+        group {
+            name    "folder10"
+            label   "Emission"
+
+            parm {
+                name    "sepparm11"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "medium" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "t_trailing"
+                label   "Enable Trailing"
+                type    toggle
+                default { "1" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm25"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "medium" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "trail_amount"
+                label   "Amount"
+                type    integer
+                default { "250" }
+                disablewhen "{ t_trailing == 0 }"
+                range   { 0 500 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm22"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "trail_life"
+                label   "Life Expectancy"
+                type    float
+                default { "1.5" }
+                disablewhen "{ t_trailing == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "trail_life_var"
+                label   "Life Variance"
+                type    float
+                default { "0.5" }
+                disablewhen "{ t_trailing == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm24"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "medium" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "trail_emit"
+                label   "Trail Emission on Main Life"
+                type    ramp_flt
+                default { "4" }
+                disablewhen "{ t_trailing == 0 }"
+                range   { 1! 10 }
+                parmtag { "rampfloatdefault" "1pos ( 0 ) 1value ( 0 ) 1interp ( catmull-rom ) 2pos ( 0.20000000298023224 ) 2value ( 1 ) 2interp ( catmull-rom ) 3pos ( 0.80000001192092896 ) 3value ( 1 ) 3interp ( catmull-rom ) 4pos ( 1 ) 4value ( 0 ) 4interp ( linear )" }
+                parmtag { "rampshowcontrolsdefault" "0" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm21"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "medium" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            groupcollapsible {
+                name    "folder11"
+                label   "Shape & Velocity"
+                disablewhentab "{ t_trailing == 0 }"
+                parmtag { "group_default" "1" }
+
+                parm {
+                    name    "trail_pspread"
+                    label   "Position Spread"
+                    type    float
+                    default { "0" }
+                    disablewhen "{ t_trailing == 0 }"
+                    range   { 0 10 }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "trail_vspread"
+                    label   "Velocity Spread"
+                    type    float
+                    default { "2" }
+                    disablewhen "{ t_trailing == 0 }"
+                    range   { 0 10 }
+                    parmtag { "script_callback_language" "python" }
+                }
+                parm {
+                    name    "trail_vinherit"
+                    label   "Inherit Velocity"
+                    type    float
+                    default { "0" }
+                    disablewhen "{ t_trailing == 0 }"
+                    range   { 0 10 }
+                    parmtag { "script_callback_language" "python" }
+                }
+            }
+
+        }
+
+        group {
+            name    "folder10_1"
+            label   "Forces"
+            tabbreak
+            disablewhentab "{ t_trailing == 0 }"
+
+            parm {
+                name    "sepparm19"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "trail_gravity"
+                label   "Gravity Multiplier"
+                type    float
+                default { "1" }
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "trail_drag"
+                label   "Drag Multiplier"
+                type    float
+                default { "0" }
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm20"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            groupsimple {
+                name    "folder14"
+                label   "Wind"
+
+                parm {
+                    name    "sepparm18"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                parm {
+                    name    "trail_wind"
+                    label   "Wind Velocity"
+                    type    direction
+                    size    3
+                    default { "0" "0" "0" }
+                    range   { 0 10 }
+                    parmtag { "autoscope" "0000000000000000" }
+                    parmtag { "parmvop" "1" }
+                    parmtag { "shaderparmcontexts" "cvex" }
+                    parmtag { "units" "kg1m1s-2" }
+                }
+                parm {
+                    name    "sepparm17"
+                    label   "Spacer"
+                    type    separator
+                    default { "" }
+                    parmtag { "sidefx::layout_height" "small" }
+                    parmtag { "sidefx::look" "blank" }
+                }
+                groupsimple {
+                    name    "folder15"
+                    label   "Noise"
+
+                    parm {
+                        name    "trail_amp"
+                        label   "Amplitude"
+                        type    float
+                        default { "0" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                        parmtag { "units" "kg1m1s-2" }
+                    }
+                    parm {
+                        name    "trail_swirlsize"
+                        label   "Swirl Size"
+                        type    float
+                        default { "1" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                        parmtag { "units" "m1" }
+                    }
+                    parm {
+                        name    "trail_swirlscale"
+                        label   "Swirl Scale"
+                        type    float
+                        size    3
+                        default { "1" "1" "1" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "trail_pulselength"
+                        label   "Pulse Length"
+                        type    float
+                        default { "1" }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                        parmtag { "units" "s1" }
+                    }
+                    parm {
+                        name    "trail_rough"
+                        label   "Roughness"
+                        type    float
+                        default { "0.5" }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "trail_atten"
+                        label   "Attenuation"
+                        type    float
+                        default { "1" }
+                        range   { 0 1 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "trail_turb"
+                        label   "Turbulence"
+                        type    integer
+                        default { "3" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                    parm {
+                        name    "trail_offset"
+                        label   "Offset"
+                        type    float
+                        size    4
+                        default { "0" "0" "0" "0" }
+                        range   { 0 10 }
+                        parmtag { "autoscope" "0000000000000000" }
+                        parmtag { "parmvop" "1" }
+                        parmtag { "shaderparmcontexts" "cvex" }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    group {
+        name    "folder8_2"
+        label   "Settings"
+
+        groupsimple {
+            name    "folder1"
+            label   "Sim Settings"
+
+            parm {
+                name    "substep"
+                label   "Substeps"
+                type    integer
+                default { "8" }
+                range   { 1! 10 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "startframe"
+                label   "Start Frame"
+                type    integer
+                default { "$FSTART" }
+                range   { 1 240 }
+                parmtag { "autoscope" "0000000000000000" }
+                parmtag { "script_callback_language" "python" }
+            }
+        }
+
+        groupsimple {
+            name    "folder4"
+            label   "Guide Color"
+
+            parm {
+                name    "guide_color"
+                label   "Main Color"
+                type    color
+                size    3
+                default { "0" "0" "1" }
+                range   { 0 1 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "guide_color_trail"
+                label   "Trail Color"
+                type    color
+                size    3
+                default { "1" "1" "0" }
+                range   { 0 1 }
+                parmtag { "script_callback_language" "python" }
+            }
+        }
+
+        groupsimple {
+            name    "folder7"
+            label   "Misc"
+
+            parm {
+                name    "t_stringid"
+                label   "Add String ID"
+                type    toggle
+                default { "0" }
+                parmtag { "script_callback_language" "python" }
+            }
+        }
+
+    }
+
+}

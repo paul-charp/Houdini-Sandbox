@@ -1,0 +1,10 @@
+{
+	"values":["19.5.534"
+	],
+	"indexes":{
+		"hdaroot/output0.userdata":0,
+		"hdaroot/t_pscale_random.userdata":0,
+		"hdaroot/t_intensity_random.userdata":0,
+		"hdaroot/t_preview_intensity.userdata":0
+	}
+}

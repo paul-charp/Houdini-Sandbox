@@ -1,0 +1,437 @@
+# Dialog script for paul.charpentier::firework_lookdev::1.0 automatically generated
+
+{
+    name	paul.charpentier::firework_lookdev::1.0
+    script	paul.charpentier::firework_lookdev::1.0
+    label	"Firework Lookdev"
+
+    help {
+	""
+    }
+
+    inputlabel	1	Particules
+    inputlabel	2	"Sub-Network Input #2"
+    inputlabel	3	"Sub-Network Input #3"
+    inputlabel	4	"Sub-Network Input #4"
+
+    parm {
+        name    "sepparm9"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "small" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    parm {
+        name    "group"
+        label   "Group"
+        type    string
+        default { "" }
+        menutoggle {
+            [ "opmenu -l -a calc_normage group" ]
+        }
+        range   { 0 1 }
+        parmtag { "autoscope" "0000000000000000" }
+        parmtag { "script_action" "import soputils\nkwargs['geometrytype'] = kwargs['node'].parmTuple('grouptype')\nkwargs['inputindex'] = 0\nsoputils.selectGroupParm(kwargs)" }
+        parmtag { "script_action_help" "Select geometry from an available viewport." }
+        parmtag { "script_action_icon" "BUTTONS_reselect" }
+    }
+    parm {
+        name    "grouptype"
+        label   "Group Type"
+        type    ordinal
+        default { "guess" }
+        menu {
+            "guess"     "Guess from Group"
+            "vertices"  "Vertices"
+            "edges"     "Edges"
+            "points"    "Points"
+            "prims"     "Primitives"
+        }
+        range   { 0 1 }
+        parmtag { "autoscope" "0000000000000000" }
+    }
+    parm {
+        name    "t_previz_intensity"
+        label   "Preview Intensity "
+        type    toggle
+        default { "0" }
+        parmtag { "script_callback_language" "python" }
+    }
+    parm {
+        name    "sepparm4"
+        label   "Spacer"
+        type    separator
+        default { "" }
+        parmtag { "sidefx::layout_height" "small" }
+        parmtag { "sidefx::look" "blank" }
+    }
+    group {
+        name    "folder0"
+        label   "Size"
+
+        parm {
+            name    "sepparm3"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "scale"
+            label   "Global Scale"
+            type    float
+            default { "1" }
+            range   { 0 10 }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm2"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "size_age"
+            label   "Size / Age"
+            type    ramp_flt
+            default { "2" }
+            range   { 1! 10 }
+            parmtag { "autoscope" "0000000000000000" }
+            parmtag { "rampfloatdefault" "1pos ( 0 ) 1value ( 1 ) 1interp ( linear ) 2pos ( 1 ) 2value ( 0 ) 2interp ( linear )" }
+            parmtag { "rampshowcontrolsdefault" "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "t_size_random"
+            label   "Label"
+            type    toggle
+            default { "1" }
+            parmtag { "script_callback_language" "python" }
+        }
+        groupsimple {
+            name    "size_random"
+            label   "   Random (Normal Distribution)"
+            parmtag { "sidefx::header_toggle" "t_size_random" }
+
+            parm {
+                name    "sepparm8"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "scale_random_mid"
+                label   "Middle Value"
+                type    float
+                default { "1" }
+                disablewhen "{ t_size_random == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm7"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "scale_random_rng"
+                label   "Spread"
+                type    float
+                default { "0.25" }
+                disablewhen "{ t_size_random == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm5"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+        }
+
+    }
+
+    group {
+        name    "folder0_1"
+        label   "Color"
+
+        parm {
+            name    "color_age"
+            label   "Color / Age"
+            type    ramp_rgb
+            default { "2" }
+            range   { 1! 10 }
+            parmtag { "rampcolordefault" "1pos ( 0 ) 1c ( 1 1 0 ) 1interp ( linear ) 2pos ( 1 ) 2c ( 1 0.5 0 ) 2interp ( linear )" }
+            parmtag { "rampshowcontrolsdefault" "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_color_sat"
+            label   "Label"
+            type    toggle
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        groupsimple {
+            name    "size_random4"
+            label   "   Random Saturation (Normal Distribution)"
+            parmtag { "sidefx::header_toggle" "t_color_sat" }
+
+            parm {
+                name    "sepparm21"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "color_sat_mid"
+                label   "Middle Value"
+                type    float
+                default { "1" }
+                disablewhen "{ t_color_sat == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm22"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "color_sat_rng"
+                label   "Spread"
+                type    float
+                default { "0.5" }
+                disablewhen "{ t_color_sat == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm23"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+        }
+
+        parm {
+            name    "t_color_hue"
+            label   "Label"
+            type    toggle
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        groupsimple {
+            name    "size_random3"
+            label   "   Random Hue Shift (Normal Distribution)"
+            parmtag { "sidefx::header_toggle" "t_color_hue" }
+
+            parm {
+                name    "sepparm17"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "color_hue_mid"
+                label   "Middle Value"
+                type    float
+                default { "0" }
+                disablewhen "{ t_color_hue == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm18"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "color_hue_rng"
+                label   "Spread"
+                type    float
+                default { "30" }
+                disablewhen "{ t_color_hue == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm19"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+        }
+
+    }
+
+    group {
+        name    "folder0_2"
+        label   "Intensity"
+
+        parm {
+            name    "sepparm10"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "intensity"
+            label   "Global Scale"
+            type    float
+            default { "1" }
+            range   { 0 10 }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm11"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "small" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "intensity_age"
+            label   "Intensity / Age"
+            type    ramp_flt
+            default { "2" }
+            range   { 1! 10 }
+            parmtag { "rampfloatdefault" "1pos ( 0 ) 1value ( 1 ) 1interp ( linear ) 2pos ( 1 ) 2value ( 0 ) 2interp ( linear )" }
+            parmtag { "rampshowcontrolsdefault" "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "sepparm12"
+            label   "Spacer"
+            type    separator
+            default { "" }
+            parmtag { "sidefx::layout_height" "medium" }
+            parmtag { "sidefx::look" "blank" }
+        }
+        parm {
+            name    "t_intensity_random"
+            label   "Label"
+            type    toggle
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        groupsimple {
+            name    "size_random2"
+            label   "   Random (Normal Distribution)"
+            parmtag { "sidefx::header_toggle" "t_intensity_random" }
+
+            parm {
+                name    "sepparm13"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "intensity_random_mid"
+                label   "Middle Value"
+                type    float
+                default { "1" }
+                disablewhen "{ t_intensity_random == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm14"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+            parm {
+                name    "intensity_random_rng"
+                label   "Spread"
+                type    float
+                default { "1" }
+                disablewhen "{ t_intensity_random == 0 }"
+                range   { 0 10 }
+                parmtag { "script_callback_language" "python" }
+            }
+            parm {
+                name    "sepparm15"
+                label   "Spacer"
+                type    separator
+                default { "" }
+                parmtag { "sidefx::layout_height" "small" }
+                parmtag { "sidefx::look" "blank" }
+            }
+        }
+
+    }
+
+    group {
+        name    "folder0_3"
+        label   "Settings"
+
+        parm {
+            name    "seed"
+            label   "Seed"
+            type    float
+            default { "1337" }
+            range   { 0 10 }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "t_seed_attrib"
+            label   "t_seed_attrib"
+            type    toggle
+            nolabel
+            joinnext
+            default { "0" }
+            parmtag { "script_callback_language" "python" }
+        }
+        parm {
+            name    "seed_attrib"
+            label   "Seed Attribute"
+            type    string
+            default { "id" }
+            disablewhen "{ t_seed_attrib == 0 }"
+            parmtag { "script_callback_language" "python" }
+        }
+    }
+
+}
