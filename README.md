@@ -8,3 +8,8 @@ This repository is intentionally undocumented, but I'm eager to collaborate and 
 Eventualy some of thoses hda/tools/scripts could mature into their own repos.
 
 Happy tinkering!
+
+
+### Unpacked HDAs
+Note that some HDAs are in an 'unpacked' format. If you want to repack them see :
+[Working with files and assets as text](https://www.sidefx.com/docs/houdini/assets/textfiles.html)
