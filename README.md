@@ -7,6 +7,8 @@ This repository is intentionally undocumented, but I'm eager to collaborate and 
 
 Eventualy some of thoses hda/tools/scripts could mature into their own repos.
 
+Also some tools date back when I started learning houdini so not really up to my standard anymore ...  
+
 Happy tinkering!
 
 
